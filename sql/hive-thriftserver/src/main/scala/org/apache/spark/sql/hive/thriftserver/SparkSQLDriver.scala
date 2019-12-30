@@ -17,22 +17,21 @@
 
 package org.apache.spark.sql.hive.thriftserver
 
-import java.util.{ArrayList => JArrayList, Arrays, List => JList}
+import java.util.{Arrays, ArrayList => JArrayList, List => JList}
 
 import scala.collection.JavaConverters._
-
 import org.apache.commons.lang3.exception.ExceptionUtils
 import org.apache.hadoop.hive.metastore.api.{FieldSchema, Schema}
 import org.apache.hadoop.hive.ql.Driver
 import org.apache.hadoop.hive.ql.processors.CommandProcessorResponse
-
+import org.apache.hadoop.hive.ql.session.SessionState
 import org.apache.spark.internal.Logging
 import org.apache.spark.sql.{AnalysisException, SQLContext}
 import org.apache.spark.sql.execution.{QueryExecution, SQLExecution}
 
 
 private[hive] class SparkSQLDriver(val context: SQLContext = SparkSQLEnv.sqlContext)
-  extends Driver
+  extends Driver(SessionState.get.getConf)
   with Logging {
 
   private[hive] var tableSchema: Schema = _
