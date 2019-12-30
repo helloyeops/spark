@@ -1447,7 +1447,8 @@
 <!--
         <classifier>core</classifier>
 -->
-        <version>${hive.version}</version>
+<!--        <version>${hive.version}</version>-->
+        <version>2.1.1-cdh6.3.2-accu</version>
         <scope>${hive.deps.scope}</scope>
         <exclusions>
 
